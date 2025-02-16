@@ -1,49 +1,58 @@
 # FP1
 Primeiro projeto da cadeira de fundamentos de programação - 1º ano de faculdade
 
-Parking Management System (IAED Project 1 - 2023/24)
+Mountains and Valleys Project
 Overview
 
-This project implements a Parking Management System designed to manage parking lots, vehicle entries and exits, as well as billing calculations. The system handles creating parking lots, registering vehicle movements, querying vehicle history, displaying parking lot billing, and removing parking lots.
-Features:
+This project, completed as part of the Fundamentals of Programming course (2023-24), focuses on simulating the state of a rectangular territory formed by vertical and horizontal paths. The goal is to work with intersections in this territory, some of which may be occupied by mountains, forming chains of mountains and valleys.
 
-    Parking Lot Creation: Define parking lots with a name, capacity, and billing rates.
-    Vehicle Entry & Exit: Record vehicle entries and exits with specific timestamps.
-    Vehicle Usage History: Query the entry and exit history of a vehicle.
-    Billing System: Calculate and display parking fees, either by specific date or overall for a parking lot.
-    Remove Parking Lots: Safely remove parking lots and their associated data.
+The project involves writing a Python program to analyze and retrieve information about the state of a territory, including the identification of mountains, valleys, and connected intersections.
+Key Features
 
-Grade
+    Territory Representation: A territory is represented as a tuple of vertical paths, where each vertical path contains a series of intersections (either free or occupied by mountains).
+    Intersections: Each intersection is represented by a tuple containing a vertical path (letter) and a horizontal path (number).
+    Mountain Chains & Valleys: The program identifies connected chains of mountains and the valleys surrounding them.
 
-Grade: 19.75/20
-Commands
+Functions Implemented
+Territory Functions:
 
-    q: Exit the program.
-    p [<name> <capacity> <rate1> <rate2> <max_daily>]: Create or list parking lots.
-    e <lot> <license_plate> <date> <time>: Register a vehicle entry.
-    s <lot> <license_plate> <date> <time>: Register a vehicle exit.
-    v <license_plate>: List all entries and exits of a vehicle.
-    f <lot> [<date>]: Show the billing for a parking lot (daily or by date).
-    r <lot>: Remove a parking lot from the system.
+    eh_territorio: Checks if an input corresponds to a valid territory.
+    obtem_ultima_intersecao: Retrieves the top-rightmost intersection of the territory.
+    eh_intersecao: Validates if an argument is a valid intersection.
+    eh_intersecao_valida: Checks if an intersection exists in the territory.
+    eh_intersecao_livre: Checks if an intersection is free of mountains.
+    obtem_intersecoes_adjacentes: Returns valid adjacent intersections.
+    ordena_intersecoes: Sorts intersections based on the reading order of the territory.
+    territorio_para_str: Converts a territory to a human-readable string format.
 
+Mountain and Valley Functions:
+
+    obtem_cadeia: Returns the chain of connected intersections, either occupied or free, starting from a given intersection.
+    obtem_vale: Identifies the valley connected to a given mountain intersection.
+    verifica_conexao: Verifies if two intersections are connected.
+    calcula_numero_montanhas: Counts the number of mountain intersections in the territory.
+    calcula_numero_cadeias_montanhas: Counts the number of distinct mountain chains.
+    calcula_tamanho_vales: Calculates the total number of intersections forming all valleys in the territory.
+
+Example
+Input:
+
+territory = ((1,1,1,0),(0,1,0,0),(0,0,1,0),(0,0,0,0),(0,0,0,0))
+print(territory_to_str(territory))
+
+Output:
+
+ A B C D E
+4 . . . . . 4
+3 X . X . . 3
+2 X X . . . 2
+1 X . . . . 1
+A B C D E
+
+Project Evaluation
+
+The project was evaluated with a score of 19.75/20.
 Requirements
 
-    C language with standard libraries: stdio.h, stdlib.h, ctype.h, string.h
-    GCC compiler with flags: -O3 -Wall -Wextra -Werror -Wno-unused-result
-
-Compilation
-
-To compile the program, run:
-
-gcc -O3 -Wall -Wextra -Werror -Wno-unused-result -o proj1 *.c
-
-Running the Program
-
-Execute the program with:
-
-./proj1 < input_file > output_file
-
-To test the output, use:
-
-diff expected_output_file output_file
-
+    Python 3.x
+    The code is encapsulated in a single .py file.
